@@ -1,0 +1,80 @@
+
+<table border="1">
+
+
+<p id="notice"><%= notice %></p>
+<p> Participant Profile </p>
+<tr>
+  <td>User ID:</td>
+  <td><%= @userprofile.user.id %></td>
+</tr>
+<tr>
+  <td>Email:</td>
+  <td><%= @userprofile.user.email %></td>
+</tr>
+<tr>
+  <td>First name:</td>
+  <td><%= @userprofile.first_name %></td>
+</tr>
+
+<tr>
+  <td>Last name:</td>
+  <td><%= @userprofile.last_name %></td>
+</tr>
+
+<tr>
+  <td>Physical address:</td>
+  <td><%= @userprofile.physical_address %></td>
+</tr>
+
+<tr>
+   <td>Unit no:</td>
+   <td><%= @userprofile.unit_no %></td>
+</tr>
+
+
+<tr>
+  <td>Postal zip code:</td>
+  <td><%= @userprofile.postal_zip_code %></td>
+</tr>
+
+<tr>
+  <td>City:</td>
+  <td><%= @userprofile.city %></td>
+</tr>
+
+<tr>
+  <td>Country:</td>
+  <td><%= @userprofile.country %></td>
+</tr>
+<tr>
+  <td>image</td>
+  <td></td>
+   </tr>
+
+
+</table>
+<%= link_to 'save profile', edit_userprofile_path(@userprofile) %><br/>
+<br/>
+<%= link_to 'Go to the User Discussion Table',discussions_path%><br/>
+
+<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
+
+<p><%= image_tag @userprofile.avatar.url(:thumb) %>
+<%= @userprofile.first_name %></p>
+
+<p>Add or Change the photo</p>
+<%= form_for @userprofile, :html => { :multipart => true } do |f| %>
+<div class="field">
+    
+    <%= f.file_field :avatar %>
+  </div>
+   <div class="actions">
+    <%= f.submit "save photo" %>
+  </div>
+  
+<% end %>
+<%= link_to 'Edit', edit_userprofile_path(@userprofile) %> |
+<%= link_to 'Back', userprofiles_path %>
+
+

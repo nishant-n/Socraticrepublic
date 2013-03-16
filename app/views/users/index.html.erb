@@ -1,0 +1,26 @@
+<table border="1">
+	<tr>
+		 <th>Email</th>
+		 <th>User Id</th>
+	</tr>
+<% @users.each do |u|%>
+ <tr>
+ 	<td>
+  <%=u.email%></td>
+  <td><%=u.id%></td>
+
+<%end%>
+</table>
+
+<p> Add Email </p>
+<%= form_for @user, :url => create_user_users_path do |f| %>
+ 	
+ 	  <%= f.email_field :email, :autofocus => true %></div><br/>
+   <%= f.submit "Sign in" %>
+<%end%>
+
+<%= link_to "Program functionality" ,userprofile_path(current_user)%><br/>
+
+<%= link_to "Program Display"  %><br/>
+
+<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>

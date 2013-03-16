@@ -1,0 +1,45 @@
+<h1>User discussions table</h1>
+
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Deleted at</th>
+    <th>My Thesis</th>
+    <th>Withdraw</th>
+  </tr>
+
+<% @discussions.each do |discussion| %>
+  <tr>
+    <td><%= discussion.title %></td>
+    <td><%= discussion.description %></td>
+    <td><%= discussion.location %></td>
+    <td><%= discussion.deleted_at %></td>
+    <td id="sid"><%= link_to 'View'%></td>
+    <td><%= link_to 'Delete' %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'Join Discussion' %><br />
+<%= link_to 'Log Out' %><br /><br /><br />
+<br />
+
+<%#= link_to 'New Discussion', new_discussion_path %>
+<div id="some_div">
+  <%= link_to 'View comments' %></br>
+  <td>Thesis Statement:</td></br>
+  <%= link_to 'Save Changes' %></br>
+  <%= text_area_tag(:message, "Hi, nice site", :size => "50x6") %></br>
+  <td>Argument:</td></br>
+  <%= link_to 'Save Changes' %></br>
+  <%= text_area_tag(:message, "Hi, nice site", :size => "50x6") %>  
+ </div>
+<script>
+$(function() {
+  $('td#sid').click(function(event){
+    event.preventDefault();
+    $('div#some_div').toggle();
+  });
+});
+</script>

@@ -1,0 +1,22 @@
+<table border="1">
+	<tr>
+		 <th>Email</th>
+		 <th>User Id</th>
+	</tr>
+<% @users.each do |u|%>
+ <tr>
+ 	<td>
+  <%=u.email%></td>
+  <td><%=u.id%></td>
+
+<%end%>
+</table>
+
+
+<%= form_for(@users,  :url => registration_path(:user)) do |f| %>
+ <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+  <div><%= f.submit "save" %></div>
+<% end %>
+
+
