@@ -16,10 +16,10 @@
 <%= form_for @user, :url => create_user_users_path do |f| %>
  	
  	  <%= f.email_field :email, :autofocus => true %></div><br/>
-   <%= f.submit "Sign in" %>
+   <%= f.submit "Add Email" %>
 <%end%>
 
-<%= link_to "Program functionality" ,userprofile_path(current_user)%><br/>
+<%= link_to "Program functionality" ,user_profile_path(current_user)%><br/>
 
 <%= link_to "Program Display"  %><br/>
 

@@ -12,20 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.label :thesis %><br />
+    <%= f.text_area :thesis %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.label :argument %><br />
+    <%= f.text_area :argument %>
   </div>
   <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
+    <%= f.label :name %><br />
+    <%= f.number_field :name %>
   </div>
   <div class="field">
-    <%= f.label :deleted_at %><br />
-    <%= f.date_select :deleted_at %>
+    <%= f.label :determination%><br />
+    <%= f.number_field :determination %>
   </div>
   <div class="actions">
     <%= f.submit %>

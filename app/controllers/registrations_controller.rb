@@ -1,6 +1,5 @@
 class RegistrationsController <Devise::RegistrationsController
  def new
- 	debugger
     super
   end
 

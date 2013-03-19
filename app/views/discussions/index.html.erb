@@ -1,45 +1,53 @@
-<h1>User discussions table</h1>
+<h1>User Discussions table</h1>
 
-<table border="1">
+<table border='1'>
   <tr>
-    <th>Title</th>
-    <th>Description</th>
+    <th>Name</th>
+    <th>Determination</th>
     <th>Location</th>
-    <th>Deleted at</th>
+    <th>Number in Forum </th>
     <th>My Thesis</th>
     <th>Withdraw</th>
   </tr>
 
 <% @discussions.each do |discussion| %>
   <tr>
-    <td><%= discussion.title %></td>
-    <td><%= discussion.description %></td>
-    <td><%= discussion.location %></td>
-    <td><%= discussion.deleted_at %></td>
-    <td id="sid"><%= link_to 'View'%></td>
+    <td><%= discussion.name %></td>
+    <td><%= discussion.determination %></td>
+    <td></td>
+    <td><%= discussion.base_fourms %></td>
+    <td><%= link_to 'view', view_discussion_discussion_path(discussion) ,:remote => true, :id=>"#ajax_trigger_view" %></td>
+    
+    
+   
+    
+
     <td><%= link_to 'Delete' %></td>
   </tr>
 <% end %>
 </table>
-<%= link_to 'Join Discussion' %><br />
-<%= link_to 'Log Out' %><br /><br /><br />
-<br />
 
-<%#= link_to 'New Discussion', new_discussion_path %>
-<div id="some_div">
-  <%= link_to 'View comments' %></br>
-  <td>Thesis Statement:</td></br>
-  <%= link_to 'Save Changes' %></br>
-  <%= text_area_tag(:message, "Hi, nice site", :size => "50x6") %></br>
-  <td>Argument:</td></br>
-  <%= link_to 'Save Changes' %></br>
-  <%= text_area_tag(:message, "Hi, nice site", :size => "50x6") %>  
- </div>
+<br/>
+
+
+
+<%= link_to 'Add Discussion', new_discussion_path %><br/>
+<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
+
+
+<div id="cid"></div>
+
 <script>
-$(function() {
-  $('td#sid').click(function(event){
-    event.preventDefault();
-    $('div#some_div').toggle();
-  });
+$(document).ready(
+     function(){
+          $("#ajax_trigger_view").bind("ajax:success",
+                   function(evt, data, status, xhr){
+                      //this assumes the action returns an HTML snippet
+                        $("div#cid").html(data);
+           }).bind("ajax:error", function(evt, data, status, xhr){
+                    //do something with the error here
+                    $("div#errors p").text(data);
+           });
 });
+
 </script>

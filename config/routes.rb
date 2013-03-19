@@ -1,12 +1,30 @@
 Socraticrepublic::Application.routes.draw do
+  
+
+
+  resources :discussions do
+    member do
+         get 'add_my_topic'
+         get 'view_discussion'
+         get 'comments'
+         get 'show_user'
+    end
+    collection do
+      get 'add_discussion'  
+    end 
+   end  
+
+
+  resources :user_profiles
+
+
   #devise_for :users
   devise_for :users, :controllers => {:sessions => "sessions"}
  
   resources :users  do
     collection do
          post 'create_user'
-        
-    end
+      end
   end
 
   #     member do
@@ -20,7 +38,7 @@ Socraticrepublic::Application.routes.draw do
   #   end
    
   #devise_for :user,:controllers => {:sessions => "sessions"}, :path => '', :path_names => { :sign_in => "login", :sign_out => "destroy", :sign_up => "register" }
-  resources :userprofiles
+  
 
    resources :discussions
 

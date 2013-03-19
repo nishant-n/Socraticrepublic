@@ -1,0 +1,75 @@
+<h3> Discussin Comments Table for <%=@user_profile.first_name %> </h3>
+<table border='1'>
+	<tr><th>First Name
+	</th>
+	<th>
+		Location
+	</th>
+	<th> 
+		Date Last Change
+	</th>
+	<th>
+		Comments
+	</th></tr>
+<% unless @user_discussions.blank? %>
+	
+
+	<% @user_discussions.each do |user| %>
+  
+	<tr>
+		<td>
+         <%= user.user_profile.first_name %>
+		</td>
+		<td>
+			<%= user.user_profile.city %>
+		</td>
+		<td>
+			<%= user.user_profile.updated_at %>
+		</td>
+		<td>
+			<%= link_to 'view',show_user_discussion_path(@discussion,{:user_id=>user.id}) ,:remote => true, :id=>"#ajax_trigger_view" %>
+		</td>
+	</tr>
+<% end %>	
+<% else %>
+<tr>
+	<td colspan="4" align="center"> No one has joined</td>
+</tr>
+<% end %>
+
+</table>
+
+  <%= link_to 'Consensus Vote'%></br>
+	<%= link_to 'Representive Vote'%></br>
+	<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
+	<br><br/>
+ <%= form_for @discussion do |f| %>
+<p>
+        Thesis Statment
+</p>
+<p><%= f.submit  "Save Chanages"%></p>
+<p> <%= f.text_area :thesis , :size => "35x4"%></p>
+<p>
+        Arguments
+</p>
+<p><%= f.submit  "Save Chanages"%></p>
+<p><%= f.text_area :argument , :size => "35x4"%></p>
+
+<% end %>
+
+	<div id="cid"></div>
+
+<script>
+$(document).ready(
+     function(){
+          $("#ajax_trigger_view").bind("ajax:success",
+                   function(evt, data, status, xhr){
+                      //this assumes the action returns an HTML snippet
+                        $("div#cid").html(data);
+           }).bind("ajax:error", function(evt, data, status, xhr){
+                    //do something with the error here
+                    $("div#errors p").text(data);
+           });
+});
+
+</script>

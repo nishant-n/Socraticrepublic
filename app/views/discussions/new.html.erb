@@ -1,5 +1,57 @@
-<h1>New discussion</h1>
+<h1>Master Discussion Table</h1>
+<table border='1'>
+	<tr>
+		<th>Name
+		</th>
+		<th>Determination
+		</th>
+		<th>Origin
+		</th>
+		<th>levels
+		</th>
+		<th>Base Fourms
+		</th>
+		<th>Action
+	</tr>
+	<% @discussions.each do |discussion| %>
+	<tr>
+		<td><%= discussion.name %></td>
+		<td><%= discussion.determination %></td>
+		<td><%= discussion.origin %></td>
+		<td><%= discussion.level %></td>
+		<td><%= discussion.base_fourms %></td>
+		<td><%= link_to 'add', add_my_topic_discussion_path(discussion) %></td>
+		
+	</tr>
+	<% end %>
+	</table>
 
-<%= render 'form' %>
+<br/><br/>
+<%= link_to 'Add a Topic' ,add_discussion_discussions_path,:remote => true, :id=>"#ajax_trigger_view" %><br/>
+<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
 
-<%= link_to 'Back', discussions_path %>
+
+<br/>
+<br/>
+
+
+
+<div id="add_dis"></div>
+
+<script>
+$(document).ready(
+     function(){
+          $("#ajax_trigger_view").bind("ajax:success",
+                   function(evt, data, status, xhr){
+                      //this assumes the action returns an HTML snippet
+                        $("div#add_dis").html(data);
+           }).bind("ajax:error", function(evt, data, status, xhr){
+                    //do something with the error here
+                    $("div#errors p").text(data);
+           });
+});
+
+</script>
+
+
+

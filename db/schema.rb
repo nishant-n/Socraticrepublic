@@ -11,24 +11,56 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316153758) do
+ActiveRecord::Schema.define(:version => 20130319152000) do
 
-  create_table "discussions", :force => true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.string   "location"
-    t.date     "deleted_at"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "user_dicussions", :force => true do |t|
+  create_table "comments", :force => true do |t|
+    t.text     "comments"
+    t.integer  "user_id"
     t.integer  "discussion_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "user_dicussions", ["discussion_id"], :name => "index_user_dicussions_on_discussion_id"
+  create_table "discussions", :force => true do |t|
+    t.text     "thesis"
+    t.text     "argument"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "name"
+    t.string   "determination"
+    t.string   "origin",        :default => "state"
+    t.integer  "level",         :default => 0
+    t.string   "base_fourms",   :default => "0"
+    t.integer  "user_id"
+  end
+
+  create_table "user_discussions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "discussion_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "user_profiles", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "physical_address"
+    t.string   "unit_no"
+    t.string   "postal_zip_code"
+    t.string   "city"
+    t.string   "county"
+    t.string   "state"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "user_id"
+    t.string   "country"
+  end
 
   create_table "userprofiles", :force => true do |t|
     t.string   "first_name"
@@ -37,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20130316153758) do
     t.integer  "unit_no"
     t.integer  "postal_zip_code"
     t.string   "city"
-    t.string   "country"
+    t.string   "county"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.string   "avatar_file_name"
