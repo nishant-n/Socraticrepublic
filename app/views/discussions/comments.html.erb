@@ -13,10 +13,7 @@
 		Comments
 	</th></tr>
 <% unless @user_discussions.blank? %>
-	
-
-	<% @user_discussions.each do |user| %>
-  
+	<% @user_discussions.each do |user| %> 
 	<tr>
 		<td>
          <%= link_to user.user_profile.first_name ,discussion_path(@discussion,{:user_id=>user.id})%>
