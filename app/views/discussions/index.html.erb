@@ -15,8 +15,9 @@
     <td><%= discussion.name %></td>
     <td><%= discussion.determination %></td>
     <td></td>
-    <td><%= discussion.base_fourms %></td>
-    <td><%= link_to 'view', view_discussion_discussion_path(discussion) ,:remote => true, :id=>"#ajax_trigger_view" %></td>
+
+    <td><%= discussion.joined_user.size %></td>
+    <td><%= link_to 'select', view_discussion_discussion_path(discussion) ,:remote => true, :id=>"#ajax_trigger_view" %></td>
     
     
    

@@ -1,17 +1,27 @@
-<p id="notice"><%= notice %></p>
+
+<%=link_to "Return to My List",comments_discussion_path(@discussion)%></br></br>
+<%= image_tag @user_profile.avatar.url(:thumb) %>
+<%=@user_profile.first_name%>
+
+
+ <br/>
+<%= form_for @discussion do |f| %>
+<p>
+	Thesis Statment:<%=@discussion.updated_at.strftime('%m/%d/%y')%>
+</p>
+<p> <p><%= f.text_area :argument , :size => "35x4",:value=> "#{@discussion.thesis}" %></p>
+<p>
+	Arguments: <%=@discussion.updated_at.strftime('%m/%d/%y')%>
+</p>
+<p><%= f.text_area :argument , :size => "35x4",:value=> "#{@discussion.argument}" %></p></p>
+<% end %>
+
+
+<%= form_for  @discussion.comments.build do |f| %>
 
 <p>
-  <b>Thesis:</b>
-  <%= @discussion.thesis %>
+	Enter the Comment
 </p>
-
-<p>
-  <b>Argument:</b>
-  <%= @discussion.argument %>
-</p>
-
-
-
-
-<%= link_to 'Edit', edit_discussion_path(@discussion) %> |
-<%= link_to 'Back', discussions_path %>
+<p><%= f.submit  "Save Chanages"%></p>
+<p><%= f.text_area :comments , :size => "35x4"%></p>
+<% end %>

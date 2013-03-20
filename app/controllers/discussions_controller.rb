@@ -17,6 +17,8 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1.json
   def show
     @discussion = Discussion.find(params[:id])
+    @user=User.find(params[:user_id])
+    @user_profile=@user.user_profile
 
     respond_to do |format|
       format.html # show.html.erb
@@ -44,24 +46,26 @@ class DiscussionsController < ApplicationController
   # POST /discussions
   # POST /discussions.json
   def create
-    @discussion = Discussion.new(params[:discussion])
+    @discussions = Discussion.all
+    @discussion = current_user.discussions.new(params[:discussion])
     respond_to do |format|
       if @discussion.save
-        format.html { redirect_to @discussion, notice: 'Discussion was successfully created.' }
+        format.html { redirect_to new_discussion_path, notice: 'Discussion was successfully created.' }
         format.json { render json: @discussion, status: :created, location: @discussion }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @discussion.errors, status: :unprocessable_entity }
+     else
+        format.html { redirect_to new_discussion_path, notice: 'Name and Determination Cant be Null .' }
+        format.json {  }
       end
     end
+  
+        
+   
   end
 
   # PUT /discussions/1
   # PUT /discussions/1.json
   def update
-
     @discussion = Discussion.find(params[:id])
-
     respond_to do |format|
       if @discussion.update_attributes(params[:discussion])
         format.html { redirect_to discussions_path, notice: 'Discussion was successfully updated.' }
@@ -105,11 +109,18 @@ class DiscussionsController < ApplicationController
  end  
 
  def add_my_topic
-   @user_discussion = UserDiscussion.new
-   @user_discussion.discussion_id = params[:id]
-   @user_discussion.user_id = current_user.id
-   @user_discussion.save
-   redirect_to  discussions_path
+      @discussion = Discussion.find_by_id(params[:id])
+     if !@discussion.blank? && @discussion.joined_user.size < 18
+         @user_discussion = UserDiscussion.find_or_create_by_discussion_id_and_user_id(params[:id],current_user.id)
+          @discussion.update!
+         # @user_discussion = UserDiscussion.new
+         # @user_discussion.discussion_id = params[:id]
+         # @user_discussion.user_id = current_user.id
+         # @user_discussion.save
+         redirect_to  discussions_path, notice: "added the discussion ."
+     else 
+        redirect_to :back , notice: "User could not be added the discussion."
+     end
  end 
 
 
@@ -124,11 +135,16 @@ class DiscussionsController < ApplicationController
  def show_user     
       @user_profile = UserProfile.find(params[:user_id])
       @discussion = Discussion.find(params[:id])
-
+      @user_comments = Comment.where("user_id = ? and discussion_id =?", params[:user_id],@discussion.id)
       respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @discussion }
       format.js
     end
   end 
+
+  def view_user_comments
+    @user_comments = Comment.where("user_id = ? and discussion_id =?", current_user,params[:id])
+   end
+
 end

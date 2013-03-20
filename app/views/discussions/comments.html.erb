@@ -1,4 +1,5 @@
-<h3> Discussin Comments Table for <%=@user_profile.first_name %> </h3>
+<% unless @discussion.nil?  %>
+<h3> Discussion Comments Table for <%= @user_profile.first_name %> </h3>
 <table border='1'>
 	<tr><th>First Name
 	</th>
@@ -18,7 +19,7 @@
   
 	<tr>
 		<td>
-         <%= user.user_profile.first_name %>
+         <%= link_to user.user_profile.first_name ,discussion_path(@discussion,{:user_id=>user.id})%>
 		</td>
 		<td>
 			<%= user.user_profile.city %>
@@ -38,6 +39,7 @@
 <% end %>
 
 </table>
+<%end%>
 
   <%= link_to 'Consensus Vote'%></br>
 	<%= link_to 'Representive Vote'%></br>
@@ -45,14 +47,23 @@
 	<br><br/>
  <%= form_for @discussion do |f| %>
 <p>
-        Thesis Statment
+        Thesis Statment:<%=@discussion.updated_at.strftime('%m/%d/%y')%>
 </p>
-<p><%= f.submit  "Save Chanages"%></p>
+<p>
+	<% if can? :update, @discussion %>
+		<%= f.submit  "Save Changes"%>
+	<%end%>
+</p>
 <p> <%= f.text_area :thesis , :size => "35x4"%></p>
 <p>
-        Arguments
+        Arguments:<%=@discussion.updated_at.strftime('%m/%d/%y')%>
 </p>
-<p><%= f.submit  "Save Chanages"%></p>
+<p>
+	<% if can? :update, @discussion %>
+		<%= f.submit  "Save Changes"%>
+	<%end%>
+
+</p>
 <p><%= f.text_area :argument , :size => "35x4"%></p>
 
 <% end %>

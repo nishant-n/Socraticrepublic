@@ -4,5 +4,18 @@ class Discussion < ActiveRecord::Base
   belongs_to :user
   has_many :joined_user,:through=>:user_discussions ,:source =>:user
   has_many :comments
-  belongs_to :user
+
+  validates :name, :presence => true 
+                    
+
+  validates :determination, :presence => true
+                    
+
+  def update!
+  	 update_attributes(:level => 1, :base_fourms=>1)
+  end	
+
+  def to_param
+    "#{id} #{name}".parameterize
+  end
 end

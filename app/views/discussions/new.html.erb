@@ -20,7 +20,7 @@
 		<td><%= discussion.origin %></td>
 		<td><%= discussion.level %></td>
 		<td><%= discussion.base_fourms %></td>
-		<td><%= link_to 'add', add_my_topic_discussion_path(discussion) %></td>
+		<td><%= link_to 'select', add_my_topic_discussion_path(discussion) %></td>
 		
 	</tr>
 	<% end %>
@@ -29,7 +29,6 @@
 <br/><br/>
 <%= link_to 'Add a Topic' ,add_discussion_discussions_path,:remote => true, :id=>"#ajax_trigger_view" %><br/>
 <%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
-
 
 <br/>
 <br/>

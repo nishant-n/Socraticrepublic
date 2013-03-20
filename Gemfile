@@ -8,7 +8,7 @@ gem 'rails', '3.2.12'
 gem 'mysql2'
 gem 'paperclip'
 gem 'devise'
-
+gem 'cancan'
 group :production do
 	gem "pg"
 end
@@ -22,6 +22,7 @@ group :assets do
    gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+
 end
 
 gem 'jquery-rails'
@@ -40,3 +41,4 @@ gem 'jquery-rails'
 
 # To use debugger
 gem 'debugger'
+

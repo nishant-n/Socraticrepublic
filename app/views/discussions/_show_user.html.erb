@@ -2,7 +2,22 @@
 <%= image_tag @user_profile.avatar.url(:thumb) %>
 <%=@user_profile.first_name
  %>
- <br/>
- <%#= @user_comments.comments %>
+<br/>
+<p>Commets of member when user click <%=link_to "View",view_user_comments_discussion_path(@discussion) ,:id=>"view_click"%></p>
+
+<ul id="comments">
+ <% @user_comments.each do |comment|  %>
+ 	<li><%=comment.comments%></li>
+
+ <%end%>
  
   
+</ul>
+<script>
+	$(document).ready(function(){
+		$('#view_click').click(function(e){
+			e.preventDefault()
+			$('#comments').toggle('slow')
+		})
+	})
+</script>

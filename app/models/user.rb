@@ -12,6 +12,6 @@ class User < ActiveRecord::Base
   has_many :user_discussions
   has_many :discussions
   has_many :joined_discussions,:through=>:user_discussions,:source => :discussion
-
+  has_many :comments
   
 end

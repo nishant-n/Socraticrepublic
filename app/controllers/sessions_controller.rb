@@ -6,7 +6,7 @@ class SessionsController < Devise::SessionsController
           sign_in :user, user 
           redirect_to ''
          else
-           redirect_to :back;
+           redirect_to :back, notice: "incorrect email id."
          end 
 
       end
