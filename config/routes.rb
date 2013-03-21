@@ -9,6 +9,7 @@ Socraticrepublic::Application.routes.draw do
          get 'comments'
          get 'show_user'
          get 'view_user_comments'
+         delete 'destroy_user_discussion'
     end
     collection do
       get 'add_discussion'  

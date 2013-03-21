@@ -148,4 +148,14 @@ class DiscussionsController < ApplicationController
     @user_comments = Comment.where("user_id = ? and discussion_id =?", current_user,params[:id])
    end
 
+
+  def destroy_user_discussion
+    @user_discussion=current_user.user_discussions.find_by_discussion_id(params[:id])
+    @user_discussion.destroy
+    respond_to do |format|
+      format.html { redirect_to discussions_url }
+      format.json { head :no_content }
+    end
+  end
+
 end

@@ -14,16 +14,11 @@
   <tr>
     <td><%= discussion.name %></td>
     <td><%= discussion.determination %></td>
-    <td></td>
-
+    <td><%=discussion.user.user_profile.city%></td>
     <td><%= discussion.joined_user.size %></td>
     <td><%= link_to 'select', view_discussion_discussion_path(discussion) ,:remote => true, :id=>"#ajax_trigger_view" %></td>
-    
-    
-   
-    
+    <td><%= link_to 'Delete',destroy_user_discussion_discussion_path(discussion),:method => :delete%></td>
 
-    <td><%= link_to 'Delete' %></td>
   </tr>
 <% end %>
 </table>
