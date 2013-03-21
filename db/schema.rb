@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130319152000) do
+ActiveRecord::Schema.define(:version => 20130321110530) do
 
   create_table "comments", :force => true do |t|
     t.text     "comments"
     t.integer  "user_id"
     t.integer  "discussion_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "user_discussion_id"
   end
 
   create_table "discussions", :force => true do |t|
@@ -37,8 +38,13 @@ ActiveRecord::Schema.define(:version => 20130319152000) do
   create_table "user_discussions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "discussion_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "thesis"
+    t.string   "argument"
+    t.integer  "uers_discussion_id"
+    t.text     "thesis1"
+    t.text     "argument1"
   end
 
   create_table "user_profiles", :force => true do |t|

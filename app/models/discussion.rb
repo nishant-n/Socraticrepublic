@@ -15,7 +15,4 @@ class Discussion < ActiveRecord::Base
   	 update_attributes(:level => 1, :base_fourms=>1)
   end	
 
-  def to_param
-    "#{id} #{name}".parameterize
-  end
 end

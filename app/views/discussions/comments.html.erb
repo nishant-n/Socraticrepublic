@@ -16,7 +16,7 @@
 	<% @user_discussions.each do |user| %> 
 	<tr>
 		<td>
-         <%= link_to user.user_profile.first_name ,discussion_path(@discussion,{:user_id=>user.id})%>
+         <%= link_to user.user_profile.first_name ,show_user_discussion_discussion_path(@discussion,{:user_id=>user.id})%>
 		</td>
 		<td>
 			<%= user.user_profile.city %>
@@ -42,23 +42,23 @@
 	<%= link_to 'Representive Vote'%></br>
 	<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
 	<br><br/>
- <%= form_for @discussion do |f| %>
+ <%= form_for @user_discussion ,:url=>discussion_path(@discussion),:method=>:put do |f| %>
 <p>
-        Thesis Statment:<%=@discussion.updated_at.strftime('%m/%d/%y')%>
+        Thesis Statment:<%=@user_discussion.updated_at.strftime('%m/%d/%y')%>
 </p>
 <p>
-	<% if can? :update, @discussion %>
+
 		<%= f.submit  "Save Changes"%>
-	<%end%>
+
 </p>
 <p> <%= f.text_area :thesis , :size => "35x4"%></p>
 <p>
-        Arguments:<%=@discussion.updated_at.strftime('%m/%d/%y')%>
+        Arguments:<%=@user_discussion.updated_at.strftime('%m/%d/%y')%>
 </p>
 <p>
-	<% if can? :update, @discussion %>
+
 		<%= f.submit  "Save Changes"%>
-	<%end%>
+
 
 </p>
 <p><%= f.text_area :argument , :size => "35x4"%></p>

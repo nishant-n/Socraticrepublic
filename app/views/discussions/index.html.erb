@@ -14,7 +14,7 @@
   <tr>
     <td><%= discussion.name %></td>
     <td><%= discussion.determination %></td>
-    <td></td>
+    <td> </td>
 
     <td><%= discussion.joined_user.size %></td>
     <td><%= link_to 'select', view_discussion_discussion_path(discussion) ,:remote => true, :id=>"#ajax_trigger_view" %></td>

@@ -33,7 +33,6 @@ class UserProfilesController < ApplicationController
   # GET /user_profiles/new.json
   def new
     @user_profile = UserProfile.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user_profile }
@@ -49,10 +48,9 @@ class UserProfilesController < ApplicationController
   # POST /user_profiles.json
   def create
     @user_profile = UserProfile.new(params[:user_profile])
-
     respond_to do |format|
       if @user_profile.save
-        format.html { redirect_to @user_profile, notice: 'User profile was successfully created.' }
+        format.html { redirect_to @user_profile, notice:'User profile was successfully created.' }
         format.json { render json: @user_profile, status: :created, location: @user_profile }
       else
         format.html { render action: "new" }
@@ -65,7 +63,6 @@ class UserProfilesController < ApplicationController
   # PUT /user_profiles/1.json
   def update
     @user_profile = UserProfile.find(params[:id])
-
     respond_to do |format|
       if @user_profile.update_attributes(params[:user_profile])
         format.html { redirect_to @user_profile, notice: 'User profile was successfully updated.' }
@@ -82,8 +79,7 @@ class UserProfilesController < ApplicationController
   def destroy
     @user_profile = UserProfile.find(params[:id])
     @user_profile.destroy
-
-    respond_to do |format|
+      respond_to do |format|
       format.html { redirect_to user_profiles_url }
       format.json { head :no_content }
     end

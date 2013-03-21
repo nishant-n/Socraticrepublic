@@ -9,6 +9,7 @@ Socraticrepublic::Application.routes.draw do
          get 'comments'
          get 'show_user'
          get 'view_user_comments'
+         get 'show_user_discussion'
     end
     collection do
       get 'add_discussion'  
@@ -40,10 +41,10 @@ Socraticrepublic::Application.routes.draw do
    
   #devise_for :user,:controllers => {:sessions => "sessions"}, :path => '', :path_names => { :sign_in => "login", :sign_out => "destroy", :sign_up => "register" }
   
-
+   resources :comments
    resources :discussions do
     member do
-      resources :comments 
+       
 
      end
     end  

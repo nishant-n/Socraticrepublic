@@ -3,7 +3,7 @@
 <%=@user_profile.first_name
  %>
 <br/>
-<p>Commets of member when user click <%=link_to "View",view_user_comments_discussion_path(@discussion) ,:id=>"view_click"%></p>
+<p>Commets of member when user click <%=link_to "View",view_user_comments_discussion_path(@user_discussion.discussion) ,:id=>"view_click"%></p>
 
 <ul id="comments">
  <% @user_comments.each do |comment|  %>
