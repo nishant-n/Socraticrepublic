@@ -14,7 +14,6 @@
   <tr>
     <td><%= discussion.name %></td>
     <td><%= discussion.determination %></td>
-      <%debugger%>
     <td><%= discussion.try(:user).try(:user_profile).try(:city) %> </td>
     <td><%= discussion.joined_user.size %></td>
     <td><%= link_to 'select', view_discussion_discussion_path(discussion) ,:remote => true, :id=>"#ajax_trigger_view" %></td>
