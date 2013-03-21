@@ -1,0 +1,32 @@
+<%#=link_to "Return to My List",comments_discussion_path(@user_discussion)%></br></br>
+<%= image_tag(@user.user_profile.avatar.url(:thumb)) unless @user.user_profile.avatar.blank? %>
+<b><%=@user.user_profile.try(:first_name)%></b>
+
+ <br/>
+<p>
+	Thesis Statment:<%=@user_discussion.updated_at.strftime('%m/%d/%y')%>
+</p>
+<p><%= text_area_tag  @user_discussion.try(:thesis) %></p>
+<p>
+	Arguments: <%=@user_discussion.updated_at.strftime('%m/%d/%y')%>
+</p>
+<p><%=text_area_tag @user_discussion.try(:argument)%></p></p>
+
+
+<% @user_discussion.comments.build %>
+
+<%= form_for @user_discussion ,:url=>comments_path ,:method=>:post do |f| %>
+<p>
+	Enter the Comment
+</p>
+<p><%= f.submit  "Save Chanages"%></p>
+	
+	<%= f.fields_for :comments do |c| %>
+	<%= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
+	<p><%= c.text_area :comments , :size => "35x4"%></p>
+	<% end %>
+<% end %>
+
+
+
+
