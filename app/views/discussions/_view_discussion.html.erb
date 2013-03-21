@@ -6,18 +6,16 @@
 <p>
         Thesis Statment
 </p>
-<p><% if can? :update, @discussion %>
-	<%= f.submit  "Save Changes"%>
-		<%end%>
-</p>
+
 <p> <%= f.text_area :thesis , :size => "35x4"%></p>
 <p>
         Arguments
 </p>
+
+<p><%= f.text_area :argument , :size => "35x4"%></p>
 <p><% if can? :update, @discussion %>
 	<%= f.submit  "Save Changes"%>
 <%end%>
 </p>
-<p><%= f.text_area :argument , :size => "35x4"%></p>
 
 <% end %>
