@@ -12,7 +12,6 @@
 
    <p><%=text_area_tag @user_discussion.try(:argument)%></p>
 
-
   <% @user_discussion.comments.build %>
 
    <%= form_for @user_discussion ,:url=>comments_path ,:method=>:post do |f| %>
@@ -29,17 +28,19 @@
 <% unless @user_comments.blank? %>
  <% @user_comments.each do |comment|  %>
  	<li><%=comment.comments%></li>
+
  	<%end%>
  	<% else %>
 <p> There are No Comments </p>
 <% end %>
+
 </ul>
  </fieldset>
 <script>
 	$(document).ready(function(){
 		$('#view_click').click(function(e){
-			e.preventDefault()
-			$('#comments').toggle('slow')
+			 e.preventDefault()
+			 $('#comments').toggle('slow')
 		})
 	})
 </script>

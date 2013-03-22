@@ -1,12 +1,17 @@
 <% unless @discussion.nil?  %>
- <h3> Discussion Member Table for <%= @user_profile.first_name %> </h3>
-  <table border='1'>
-	 <tr>
-	 	   <th>First Name</th>
-	     <th>Location</th>
-	     <th>Date Last Change</th>  
-	     <th>Thesis</th>
-	 </tr>
+<h3> Discussion Comments Table for <%= @user_profile.first_name %> </h3>
+<table border='1'>
+	<tr><th>First Name
+	</th>
+	<th>
+		Location
+	</th>
+	<th> 
+		Date Last Change
+	</th>
+	<th>
+		Thesis
+	</th></tr>
 <% unless @user_discussions.blank? %>
 	<% @user_discussions.each do |user| %> 
 	<tr>
@@ -37,9 +42,8 @@
 	<%= link_to 'Representive Vote'%></br>
 	<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
 	<br><br/>
-
-<div id="cid"></div>
-
+	
+	<div id="cid"></div>
  <%= form_for @user_discussion ,:url=>discussion_path(@discussion),:method=>:put do |f| %>
 <p>
         Thesis Statment:<%=@user_discussion.updated_at.strftime('%m/%d/%y')%>
@@ -60,7 +64,6 @@
 
 <% end %>
 
-	
 
 <script>
 
