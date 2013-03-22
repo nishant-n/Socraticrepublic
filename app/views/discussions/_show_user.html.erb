@@ -21,7 +21,7 @@
 			<%= f.fields_for :comments do |c| %>
 			  <%= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
 			 <p><%= c.text_area :comments , :size => "35x4"%></p>
-			 <p><%= f.submit  "Save Chanages"%></p>
+			 <p><%= f.submit  "Save Changes"%></p>
 	    <% end %>
   <% end %>
 <br/>
