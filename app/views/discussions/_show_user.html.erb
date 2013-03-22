@@ -3,15 +3,15 @@
  	   <%=@user.user_profile.try(:first_name)%>
    </legend>
    <%= image_tag(@user.user_profile.avatar.url(:thumb)) unless @user.user_profile.avatar.blank? %><br/>  
-
+   <%debugger%>
 
    <p>Thesis Statment of <%=@user.user_profile.try(:first_name)%> :<%=@user_discussion.updated_at.strftime('%m/%d/%y')%></p>
 
-   <p><%= text_area_tag  @user_discussion.try(:thesis) %></p>
+   <p><%= text_area_tag  @user_discussion.try(:thesis) ,@user_discussion.try(:thesis)%></p>
 
    <p>Arguments of <%=@user.user_profile.try(:first_name)%>: <%=@user_discussion.updated_at.strftime('%m/%d/%y')%></p>
 
-   <p><%=text_area_tag @user_discussion.try(:argument)%></p>
+   <p><%=text_area_tag @user_discussion.try(:argument),@user_discussion.try(:argument)%></p>
 
 
   <% @user_discussion.comments.build %>
@@ -26,7 +26,8 @@
   <% end %>
 <br/>
 
-<p>Commets of member when user click <%=link_to "View","javascript:void(0);",:id=>"view_click"%></p><ul id="comments">
+<p>Commets of member when user click <%=link_to "View","javascript:void(0);",:id=>"view_click"%></p>
+<ul id="comments">
         <% unless @user_comments.blank?%>
     <% @user_comments.each do |comment|  %>
              <li><%=comment.comments%></li>
