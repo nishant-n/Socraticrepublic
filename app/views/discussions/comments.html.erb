@@ -1,17 +1,12 @@
 <% unless @discussion.nil?  %>
-<h3> Discussion Comments Table for <%= @user_profile.first_name %> </h3>
-<table border='1'>
-	<tr><th>First Name
-	</th>
-	<th>
-		Location
-	</th>
-	<th> 
-		Date Last Change
-	</th>
-	<th>
-		Comments
-	</th></tr>
+ <h3> Discussion Member Table for <%= @user_profile.first_name %> </h3>
+  <table border='1'>
+	 <tr>
+	 	   <th>First Name</th>
+	     <th>Location</th>
+	     <th>Date Last Change</th>  
+	     <th>Thesis</th>
+	 </tr>
 <% unless @user_discussions.blank? %>
 	<% @user_discussions.each do |user| %> 
 	<tr>
@@ -42,32 +37,33 @@
 	<%= link_to 'Representive Vote'%></br>
 	<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
 	<br><br/>
+
+<div id="cid"></div>
+
  <%= form_for @user_discussion ,:url=>discussion_path(@discussion),:method=>:put do |f| %>
 <p>
         Thesis Statment:<%=@user_discussion.updated_at.strftime('%m/%d/%y')%>
 </p>
-<p>
 
-		<%= f.submit  "Save Changes"%>
-
-</p>
 <p> <%= f.text_area :thesis , :size => "35x4"%></p>
 <p>
         Arguments:<%=@user_discussion.updated_at.strftime('%m/%d/%y')%>
 </p>
+
+<p><%= f.text_area :argument , :size => "35x4"%></p>
 <p>
 
 		<%= f.submit  "Save Changes"%>
 
 
 </p>
-<p><%= f.text_area :argument , :size => "35x4"%></p>
 
 <% end %>
 
-	<div id="cid"></div>
+	
 
 <script>
+
 $(document).ready(
      function(){
           $("#ajax_trigger_view").bind("ajax:success",

@@ -2,6 +2,7 @@ class DiscussionsController < ApplicationController
   # GET /discussions
   # GET /discussions.json
   before_filter :authenticate_user!
+  
   def index
    
     @user_profile = current_user.user_profile
@@ -127,7 +128,10 @@ class DiscussionsController < ApplicationController
  end
 
 
- def show_user     
+ def show_user 
+      @discussion = Discussion.find_by_id(params[:id])
+      @user = User.find(params[:user_id])    
+      @user_discussion = @user.user_discussions.find_by_discussion_id(params[:id])
       @user_profile = UserProfile.find(params[:user_id])
       @user_discussion = current_user.user_discussions.find_by_discussion_id(params[:id])
       @user_comments = Comment.where("user_id = ? and user_discussion_id =?", params[:user_id],@user_discussion.id)
@@ -147,6 +151,15 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find_by_id(params[:id])
     @user = User.find(params[:user_id])    
     @user_discussion = @user.user_discussions.find_by_discussion_id(params[:id])
-    
+    end
+
+  def destroy_user_discussion
+    @user_discussion=current_user.user_discussions.find_by_discussion_id(params[:id])
+    @user_discussion.destroy
+    respond_to do |format|
+      format.html { redirect_to discussions_url }
+      format.json { head :no_content }
+    end
   end
+
 end

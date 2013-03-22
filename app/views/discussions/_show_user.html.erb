@@ -1,18 +1,40 @@
+<fieldset>
+   <legend>
+ 	   <%=@user.user_profile.try(:first_name)%>
+   </legend>
+   <%= image_tag(@user.user_profile.avatar.url(:thumb)) unless @user.user_profile.avatar.blank? %><br/>  
 
-<%= image_tag @user_profile.avatar.url(:thumb) %>
-<%=@user_profile.first_name
- %>
+   <p>Thesis Statment of <%=@user.user_profile.try(:first_name)%> :<%=@user_discussion.updated_at.strftime('%m/%d/%y')%></p>
+
+   <p><%= text_area_tag  @user_discussion.try(:thesis) %></p>
+
+   <p>Arguments of <%=@user.user_profile.try(:first_name)%>: <%=@user_discussion.updated_at.strftime('%m/%d/%y')%></p>
+
+   <p><%=text_area_tag @user_discussion.try(:argument)%></p>
+
+
+  <% @user_discussion.comments.build %>
+
+   <%= form_for @user_discussion ,:url=>comments_path ,:method=>:post do |f| %>
+		   <p> Enter the Comment	</p>	
+			<%= f.fields_for :comments do |c| %>
+			  <%= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
+			 <p><%= c.text_area :comments , :size => "35x4"%></p>
+			 <p><%= f.submit  "Save Chanages"%></p>
+	    <% end %>
+  <% end %>
 <br/>
 <p>Commets of member when user click <%=link_to "View",view_user_comments_discussion_path(@user_discussion.discussion) ,:id=>"view_click"%></p>
-
 <ul id="comments">
+<% unless @user_comments.blank? %>
  <% @user_comments.each do |comment|  %>
  	<li><%=comment.comments%></li>
-
- <%end%>
- 
-  
+ 	<%end%>
+ 	<% else %>
+<p> There are No Comments </p>
+<% end %>
 </ul>
+ </fieldset>
 <script>
 	$(document).ready(function(){
 		$('#view_click').click(function(e){

@@ -9,13 +9,12 @@
     <th>My Thesis</th>
     <th>Withdraw</th>
   </tr>
-
+<% unless @discussions.blank? %>
 <% @discussions.each do |discussion| %>
   <tr>
     <td><%= discussion.name %></td>
     <td><%= discussion.determination %></td>
-    <td> </td>
-
+    <td><%= discussion.try(:user).try(:user_profile).try(:city) %> </td>
     <td><%= discussion.joined_user.size %></td>
     <td><%= link_to 'select', view_discussion_discussion_path(discussion) ,:remote => true, :id=>"#ajax_trigger_view" %></td>
     
@@ -23,8 +22,13 @@
    
     
 
-    <td><%= link_to 'Delete' %></td>
+    <td> <%= link_to 'Delete',destroy_user_discussion_discussion_path(discussion),:method => :delete,:confirm => 'Are you sure?'%></td>
   </tr>
+<% end %>
+<% else %>
+<tr>
+  <td colspan="6" align="center"> No discussion are joined</td>
+</tr>
 <% end %>
 </table>
 
