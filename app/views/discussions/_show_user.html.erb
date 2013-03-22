@@ -25,20 +25,16 @@
 	    <% end %>
   <% end %>
 <br/>
-<p>Commets of member when user click <%=link_to "View",view_user_comments_discussion_path(@user_discussion.discussion) ,:id=>"view_click"%></p>
-<ul id="comments">
-<% unless @user_comments.blank? %>
- <% @user_comments.each do |comment|  %>
- 	<li><%=comment.comments%></li>
 
-
- 	<%end%>
- 	<% else %>
-<p> There are No Comments </p>
-<% end %>
-
-
+<p>Commets of member when user click <%=link_to "View","javascript:void(0);",:id=>"view_click"%></p><ul id="comments">
+        <% unless @user_comments.blank?%>
+    <% @user_comments.each do |comment|  %>
+             <li><%=comment.comments%></li>
+    <%end%>
+  <%end%>
 </ul>
+
+
  </fieldset>
 <script>
 	$(document).ready(function(){
