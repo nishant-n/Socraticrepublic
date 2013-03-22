@@ -76,7 +76,11 @@
 
 <%= link_to 'Edit Profile', edit_user_profile_path(@user_profile) %><br/>
 <br/>
-<%= link_to 'Go to the User Discussion Table',discussions_path%><br/>
+<%if current_user.user_discussions.present?%>
+  <%= link_to 'Go to the User Discussion Table',discussions_path%><br/>
+<%else%>
+  <%= link_to 'Go to the User Discussion Table',new_discussion_path%><br/>
+<%end%>
 
 <%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
 
