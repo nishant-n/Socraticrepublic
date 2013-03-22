@@ -135,6 +135,7 @@ class DiscussionsController < ApplicationController
       @user_profile = UserProfile.find(params[:user_id])
       @user_discussion = current_user.user_discussions.find_by_discussion_id(params[:id])
       @user_comments = Comment.where("user_id = ? and user_discussion_id =?", params[:user_id],@user_discussion.id)
+
       respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user_discussion.discussion }
@@ -163,5 +164,5 @@ class DiscussionsController < ApplicationController
   end
 
 
-  
+
 end

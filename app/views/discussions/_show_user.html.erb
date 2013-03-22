@@ -4,6 +4,7 @@
    </legend>
    <%= image_tag(@user.user_profile.avatar.url(:thumb)) unless @user.user_profile.avatar.blank? %><br/>  
 
+
    <p>Thesis Statment of <%=@user.user_profile.try(:first_name)%> :<%=@user_discussion.updated_at.strftime('%m/%d/%y')%></p>
 
    <p><%= text_area_tag  @user_discussion.try(:thesis) %></p>
@@ -11,6 +12,7 @@
    <p>Arguments of <%=@user.user_profile.try(:first_name)%>: <%=@user_discussion.updated_at.strftime('%m/%d/%y')%></p>
 
    <p><%=text_area_tag @user_discussion.try(:argument)%></p>
+
 
   <% @user_discussion.comments.build %>
 
@@ -29,10 +31,12 @@
  <% @user_comments.each do |comment|  %>
  	<li><%=comment.comments%></li>
 
+
  	<%end%>
  	<% else %>
 <p> There are No Comments </p>
 <% end %>
+
 
 </ul>
  </fieldset>
