@@ -1,5 +1,5 @@
  <%= form_for (@comment)  do |f| %>
-		   <p> Update the Comment	</p>	
+		   <p> Enter the Comment	</p>	
 			<%= f.fields_for :comments do |c| %>
 			  <%#= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
 			 <p><%= f.text_area :comments , :size => "35x4"%></p>
