@@ -22,6 +22,7 @@ class CommentsController < ApplicationController
    end
 
    def update
+    
       @comment=Comment.find(params[:id])
       @comment.user_id=@comment.user.id
       @comment.user_discussion_id=@comment.user_discussion.id

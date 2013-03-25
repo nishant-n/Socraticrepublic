@@ -129,7 +129,7 @@ class DiscussionsController < ApplicationController
 
 
  def show_user 
-       @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:id],params[:user_id]) 
+      @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:id],params[:user_id]) 
       @discussion = @user_discussion.discussion
       @user = @user_discussion.user   
       @user_profile = @user.user_profile 
