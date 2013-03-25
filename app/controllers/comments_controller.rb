@@ -22,13 +22,13 @@ class CommentsController < ApplicationController
    end
 
    def update
-    
+
       @comment=Comment.find(params[:id])
       @comment.user_id=@comment.user.id
       @comment.user_discussion_id=@comment.user_discussion.id
       respond_to do |format|
         if @comment.update_attributes(params[:comment])
-          format.html { redirect_to :back, notice: 'Discussion was successfully updated.' }
+          format.html { redirect_to :back, notice: 'Comment was successfully updated.' }
         end
       end 
     end
