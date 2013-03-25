@@ -28,8 +28,8 @@
 
 <p>Commets of member when user click <%=link_to "View","javascript:void(0);",:id=>"view_click"%></p>
 <ul id="comments">
-  <% unless @user_comments.first.user.nil?%>
-     <% @user_comments.each do |comment|  %>
+  <% unless @user_comments.first.new_record?%>
+    <% @user_comments.each do |comment|  %>
           <%if !comment.user.nil?%>
             <li><%=comment.comments%>:Commented by <%=comment.user.user_profile.try(:first_name) %>
               <% if can? :update, comment %>
