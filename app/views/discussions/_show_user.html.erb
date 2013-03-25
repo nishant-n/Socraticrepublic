@@ -5,11 +5,13 @@
    <%= image_tag(@user.user_profile.avatar.url(:thumb)) unless @user.user_profile.avatar.blank? %><br/>  
    <p>Thesis Statment of <%=@user.user_profile.try(:first_name)%> :<%=@user_discussion.updated_at.strftime('%m/%d/%y')%></p>
 
+
    <p><%= text_area_tag  @user_discussion.try(:thesis) ,@user_discussion.try(:thesis) ,:readonly => true%></p>
 
    <p>Arguments of <%=@user.user_profile.try(:first_name)%>: <%=@user_discussion.updated_at.strftime('%m/%d/%y')%></p>
 
    <p><%=text_area_tag @user_discussion.try(:argument),@user_discussion.try(:argument) ,:readonly => true%></p>
+
 
 
   <% @user_discussion.comments.build %>
