@@ -16,7 +16,7 @@ class Ability
         #can :edit, Discussion,:user => {:id => user.id}
         can :destroy, Discussion,:user => {:id => user.id}
         #can :view_discussion, Discussion, :user => {:id => user.id}
-
+        can :update, Comment, :user => {:id => user.id}
         #can :comments, Discussion,:user => {:id => user.id}
        
         
