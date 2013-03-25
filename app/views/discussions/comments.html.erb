@@ -45,25 +45,6 @@
 
 	
 	<div id="cid"></div>
- <%= form_for @user_discussion ,:url=>discussion_path(@discussion),:method=>:put do |f| %>
-<p>
-        Thesis Statment:<%=@user_discussion.updated_at.strftime('%m/%d/%y')%>
-
-
-<p> <%= f.text_area :thesis , :size => "35x4"%></p>
-<p>
-        Arguments:<%=@user_discussion.updated_at.strftime('%m/%d/%y')%>
-</p>
-
-<p><%= f.text_area :argument , :size => "35x4"%></p>
-<p>
-
-		<%= f.submit  "Save Changes"%>
-
-
-</p>
-
-<% end %>
 
 
 <script>
