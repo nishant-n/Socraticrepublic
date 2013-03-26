@@ -14,9 +14,9 @@
     <td>1</td> 	
 	<td><%= @discussion.name %></td>
     <td><%=radio_button_tag(:vote, "1", true, :class => "color_input") %></td>
-    <td><%#=Vote.getFavour(@user_discussion)%></td>
+    <td><%=Vote.getFavour(@user_discussion)%></td>
     <td><%= radio_button_tag(:vote, "0",:class => "color_input") %></td>
-    <td><%#=Vote.getAgainst(@user_discussion)%></td>
+    <td><%=Vote.getAgainst(@user_discussion)%></td>
     <td><%= f.submit "add"%></td>
     </tr>
 	</table>

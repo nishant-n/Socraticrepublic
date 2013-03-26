@@ -5,11 +5,11 @@ class Vote < ActiveRecord::Base
   belongs_to :user_discussion
 
   def self.getFavour(userdiscussion)
-   	Vote.where("favour = ? and user_discussion_id =?", 1,userdiscussion.id).count
+   	where("favour = ? and user_discussion_id =?", 1,userdiscussion.id).count
   end
 
   def self.getAgainst(userdiscussion)
-  	Vote.where("against = ? and user_discussion_id =?", 1,userdiscussion.id).count
+    where("against = ? and user_discussion_id =?", 1,userdiscussion.id).count
   end 
  end
 
