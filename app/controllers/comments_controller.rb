@@ -3,16 +3,12 @@ class CommentsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource :only => [:edit]
   def create
-
       comment = current_user.comments.build(params[:user_discussion][:comments])
-      
-      respond_to do |format|
+         respond_to do |format|
       if comment.save            
        format.html { redirect_to  :back, notice: 'successfully comment created.' }
-       
       else
         format.html { redirect_to  discussions_path}
-
        end       
      end
    end
