@@ -11,11 +11,17 @@ Socraticrepublic::Application.routes.draw do
          get 'view_user_comments'
          get 'show_user_discussion'
          delete 'destroy_user_discussion'
+         get 'votes'
     end
     collection do
       get 'add_discussion'  
     end 
-   end  
+    resources :votes do
+      collection do
+      post 'get_votes'
+    end
+  end
+end  
 
 
   resources :user_profiles

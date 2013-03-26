@@ -1,0 +1,24 @@
+<h1>Declarations for <%=@discussion.name%> - <%= @user_profile.try(:city)%></h1>
+<%= form_for @vote ,:url=>get_votes_discussion_votes_path(@discussion) do |f| %>
+<table border="1">
+	<tr>
+		 <th>No</th>
+		 <th>Declaration</th>
+		 <th>For</th>
+		 <th>Total</th>
+		 <th>Against</th>
+		 <th>Total</th>
+		 <th>Author</th>
+	</tr>
+    <tr>
+    <td>1</td> 	
+	<td><%= @discussion.name %></td>
+    <td><%=radio_button_tag(:vote, "1", true, :class => "color_input") %></td>
+    <td><%=Vote.getFavour(@user_discussion)%></td>
+    <td><%= radio_button_tag(:vote, "0",:class => "color_input") %></td>
+    <td><%=Vote.getAgainst(@user_discussion)%></td>
+    <td><%= f.submit "add"%></td>
+    </tr>
+	</table>
+
+<%end%>

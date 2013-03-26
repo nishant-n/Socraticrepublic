@@ -162,6 +162,13 @@ class DiscussionsController < ApplicationController
     end
   end
 
+   def votes
+    @user_profile = current_user.user_profile
+    @discussion = Discussion.find(params[:id])
+    @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:id],current_user.id) 
+    @vote=Vote.new
+  end
+
 
 
 end

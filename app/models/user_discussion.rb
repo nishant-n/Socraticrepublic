@@ -3,4 +3,5 @@ class UserDiscussion < ActiveRecord::Base
   belongs_to :discussion
   belongs_to :user
   has_many :comments
+  has_one :vote
 end
