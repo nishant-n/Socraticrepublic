@@ -1,6 +1,6 @@
 </br>
 <br/>
-<%= link_to 'View Members', comments_discussion_path(@user_discussion.discussion) %></br> 
+ <%= link_to "View Members for #{@user_discussion.discussion.name.capitalize}" , comments_discussion_path(@user_discussion.discussion) %></br></br> 
 <%= form_for @user_discussion ,:url=>discussion_path(@user_discussion.discussion),:method=>:put do |f| %>
   
 <p>

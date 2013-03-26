@@ -33,9 +33,9 @@
           <%if !comment.user.nil?%>
             <li><%=comment.comments%>:Commented by <%=comment.user.user_profile.try(:first_name) %>
               <% if can? :update, comment %>
-                <%=link_to "Edit",edit_comment_path(comment) ,:remote => true %>
+                <%=link_to "Edit",edit_comment_path(comment),:class=>"edit_link" ,:id=>comment.id,:remote => true %>
               <%end%>
-              <div id="commentid_<%=comment.id%>"></div>
+              <div id="commentid_<%=comment.id%>" class="comment_cont"></div>
             </li>
           <%end%> 
       <%end%>
@@ -53,8 +53,6 @@
 			 $('#comments').toggle('slow')
 		})
 	})
-
-
 </script>
 
 
