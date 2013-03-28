@@ -14,12 +14,12 @@ class VotesController < ApplicationController
 		@vote.user_discussion_id = @userdiscussion.id
 		respond_to do |format|
 		  if @vote.save
-		    format.html { redirect_to :back, notice: 'Vote was successfully created.' }
+		    format.html { redirect_to :back, notice: 'Vote  successfully created.' }
 		   end
           end
        else
      	  @vote.check_vote(params[:vote]) 
-     	  redirect_to votes_discussion_path(@userdiscussion.discussion), notice: 'Vote successfully upadated .'
+     	  redirect_to votes_discussion_path(@userdiscussion.discussion), notice: 'Vote successfully updated .'
        end	
    end  
 end
