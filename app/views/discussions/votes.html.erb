@@ -12,13 +12,22 @@
 	</tr>
     <tr>
     <td>1</td> 	
-	<td><%= @discussion.name %></td>
-    <td><%=radio_button_tag(:vote, "1", true, :class => "color_input") %></td>
+	<td><%= @discussion.determination %></td>
+	<%if @user_discussion.vote.present?
+		check1=@user_discussion.vote.favour
+		check2=@user_discussion.vote.against
+	  else
+	  	check1=true
+        check2=false
+	%>
+	<%end%>
+    <td><%=radio_button_tag(:vote, "1", check1 , :class => "color_input") %></td>
     <td><%=Vote.getFavour(@user_discussion)%></td>
-    <td><%= radio_button_tag(:vote, "0",:class => "color_input") %></td>
+    <td><%= radio_button_tag(:vote, "0",check2 ,:class => "color_input") %></td>
     <td><%=Vote.getAgainst(@user_discussion)%></td>
     <td><%= f.submit "add"%></td>
     </tr>
 	</table>
 
 <%end%>
+<%= link_to "Back",comments_discussion_path(@user_discussion.discussion)%>
