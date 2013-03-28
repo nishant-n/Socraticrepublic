@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'paperclip'
 gem 'devise'
 gem 'cancan'
+gem 'aws-sdk'
 group :production do
 	gem "pg"
 end
