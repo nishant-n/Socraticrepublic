@@ -14,7 +14,8 @@
 
 
 
-  <% @user_discussion.comments.build %>
+  <% @user_discussion.comment%>
+   <% unless !@comment.blank? %>
 
    <%= form_for @user_discussion ,:url=>comments_path ,:method=>:post do |f| %>
 		   <p> Enter the Comment	</p>	
@@ -23,25 +24,23 @@
 			 <p><%= c.text_area :comments , :size => "35x4"%></p>
 			 <p><%= f.submit  "Save Changes"%></p>
 	    <% end %>
+   <% end %>
   <% end %>
 <br/>
 
 <p>Commets of member when user click <%=link_to "View","javascript:void(0);",:id=>"view_click"%></p>
 <ul id="comments">
-  <% unless @user_comments.first.new_record?%>
-    <% @user_comments.each do |comment|  %>
-          <%if !comment.user.nil?%>
-            <li><%=comment.comments%>:Commented by <%=comment.user.user_profile.try(:first_name) %>
-              <% if can? :update, comment %>
-                <%=link_to "Edit",edit_comment_path(comment),:class=>"edit_link" ,:id=>comment.id,:remote => true %>
+  
+          <%if !@user_comment.nil?%>
+            <li><%=@user_comment.comments%>:Commented by <%=@user_comment.user.user_profile.try(:first_name) %>
+              <% if can? :update, @user_comment %>
+                <%=link_to "Edit",edit_comment_path(@user_comment),:class=>"edit_link" ,:id=>@user_comment.id,:remote => true %>
               <%end%>
-              <div id="commentid_<%=comment.id%>" class="comment_cont"></div>
+              <div id="commentid_<%=@user_comment.id%>" class="comment_cont"></div>
             </li>
-          <%end%> 
-      <%end%>
-  <% else %>
-    <h4> Comments Not Found</h4>
-  <%end%>
+            <%else%>
+            <h3>Not found</h3>
+          <%end%>
 </ul>
 
 

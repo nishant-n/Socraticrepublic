@@ -133,7 +133,8 @@ class DiscussionsController < ApplicationController
       @discussion = @user_discussion.discussion
       @user = @user_discussion.user   
       @user_profile = @user.user_profile 
-      @user_comments = @user_discussion.comments
+      @user_comment = @user_discussion.comment
+      @comment = Comment.find_by_user_id_and_user_discussion_id(current_user.id,@user_discussion[:id])
       respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user_discussion.discussion }
