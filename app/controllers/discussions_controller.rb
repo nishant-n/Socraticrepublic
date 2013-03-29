@@ -17,7 +17,6 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
-    
     @discussion = Discussion.find(params[:id])
     @user=User.find(params[:user_id])
     @user_profile=@user.user_profile
@@ -110,9 +109,15 @@ class DiscussionsController < ApplicationController
  def add_my_topic
          @discussion = Discussion.find_by_id(params[:id])
      if !@discussion.blank? && @discussion.joined_user.size < 18
-         @user_discussion = UserDiscussion.find_or_create_by_discussion_id_and_user_id(params[:id],current_user.id)
+         @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:id],current_user.id)
+         unless !@user_discussion.blank?
+          @user_discussion = UserDiscussion.create(:discussion_id=>params[:id],:user_id=>current_user.id)
+          @message = "You have added the discussion ."
+         else
+          @message = "You have already added the discussion ." 
+         end
          @discussion.update!
-         redirect_to  discussions_path, notice: "added the discussion ."
+         redirect_to  discussions_path, notice:  @message
      else 
         redirect_to :back , notice: "User could not be added the discussion."
      end
@@ -133,7 +138,7 @@ class DiscussionsController < ApplicationController
       @discussion = @user_discussion.discussion
       @user = @user_discussion.user   
       @user_profile = @user.user_profile 
-      @user_comment = @user_discussion.comment
+      @user_comments = @user_discussion.comments
       @comment = Comment.find_by_user_id_and_user_discussion_id(current_user.id,@user_discussion[:id])
       respond_to do |format|
       format.html # show.html.erb
