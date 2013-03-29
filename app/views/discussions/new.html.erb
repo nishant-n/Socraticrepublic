@@ -11,7 +11,8 @@
 		</th>
 		<th>Base Fourms
 		</th>
-		<th>Action
+		<th colspan='2'>Action </th>
+	</tr>
 	</tr>
 	<% @discussions.each do |discussion| %>
 	<tr>
@@ -23,6 +24,11 @@
 		<td><%= discussion.level %></td>
 		<td><%= discussion.base_fourms %></td>
 		<td><%= link_to 'select', add_my_topic_discussion_path(discussion) %></td>
+		 <td><% if can? :delete, discussion %>
+		 			<%= link_to 'Delete',discussion ,:method => :delete,:confirm => 'Are you sure?'%>
+		 		<% end %>
+		 	</td>
+
 		
 	</tr>
 	<% end %>

@@ -6,10 +6,9 @@ gem 'rails', '3.2.12'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'mysql2'
 gem 'paperclip'
-
 gem 'devise'
 gem 'cancan'
-
+gem 'rolify'
 
 group :production do
 	gem "pg"

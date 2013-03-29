@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  rolify
+  after_create :assign_default_role
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -13,5 +15,9 @@ class User < ActiveRecord::Base
   has_many :discussions
   has_many :joined_discussions,:through=>:user_discussions,:source => :discussion
   has_many :comments
+  def assign_default_role
+    
+    add_role(:user)
+  end
   
 end

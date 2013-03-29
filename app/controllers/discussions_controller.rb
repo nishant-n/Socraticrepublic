@@ -2,7 +2,7 @@ class DiscussionsController < ApplicationController
   # GET /discussions
   # GET /discussions.json
   before_filter :authenticate_user!
-   load_and_authorize_resource :only => [:index, :show,:comments]
+   load_and_authorize_resource :only => [:index, :show,:comments,:destroy]
   def index
    
     @user_profile = current_user.user_profile
@@ -83,7 +83,7 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find(params[:id])
     @discussion.destroy
     respond_to do |format|
-      format.html { redirect_to discussions_url }
+      format.html { redirect_to  new_discussion_url }
       format.json { head :no_content }
     end
   end

@@ -1,10 +1,13 @@
 class SessionsController < Devise::SessionsController
 	   def create
-        
-          user = User.find_by_email(params[:user][:email]) 
+         user = User.find_by_email(params[:user][:email]) 
          unless user.nil? 
           sign_in :user, user 
-          redirect_to ''
+          if user.has_role? :admin
+            redirect_to root_url
+          else
+            redirect_to user_profile_path(current_user)
+          end
          else
            redirect_to :back, notice: "incorrect email id."
          end 

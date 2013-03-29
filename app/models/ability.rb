@@ -8,18 +8,24 @@ class Ability
     #
         user ||= User.new # guest user (not logged in)
         #can :manage, :all
-        can :read, :all
-        can :comments, Discussion, {:id => user.joined_discussions.map(&:id)}
-        #can :index, Employe, :user => {:id => user.id}
-        #can :update, Discussion, :user => {:id =>user.id}
-        can :create, Discussion
-        #can :edit, Discussion,:user => {:id => user.id}
-        can :destroy, Discussion,:user => {:id => user.id}
-        #can :view_discussion, Discussion, :user => {:id => user.id}
         
-        can :update, Comment, :user => {:id => user.id}
-        #can :comments, Discussion,:user => {:id => user.id}
-       
+        if user.has_role? :admin
+         can :manage, :all
+        else
+            can :read, :all
+            cannot :read, User
+            can :comments, Discussion, {:id => user.joined_discussions.map(&:id)}
+            #cannot? :index, User
+            cannot? :create_user,User
+            #can :index, Employe, :user => {:id => user.id}
+            #can :update, Discussion, :user => {:id =>user.id}
+            can :create, Discussion
+            #can :edit, Discussion,:user => {:id => user.id}
+            cannot :destroy, Discussion,:user => {:id => user.id}
+            #can :view_discussion, Discussion, :user => {:id => user.id}
+            can :update, Comment, :user => {:id => user.id}
+            #can :comments, Discussion,:user => {:id => user.id}
+        end
         
     # The first argument to `can` is the action you are giving the user 
     # permission to do.

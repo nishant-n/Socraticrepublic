@@ -2,13 +2,14 @@
 	<tr>
 		 <th>Email</th>
 		 <th>User Id</th>
+		 <th>Action</th>
 	</tr>
-<% @users.each do |u|%>
+<% @users.each do |user|%>
  <tr>
  	<td>
-  <%=u.email%></td>
-  <td><%=u.id%></td>
-
+  <%=user.email%></td>
+  <td><%=user.id%></td>
+  <td><%= link_to 'Delete',user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <%end%>
 </table>
 
