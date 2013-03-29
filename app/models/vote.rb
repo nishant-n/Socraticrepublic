@@ -4,12 +4,14 @@ class Vote < ActiveRecord::Base
   validates_uniqueness_of :user_discussion_id
   belongs_to :user_discussion
 
-  def self.getFavour(userdiscussion)
-   	where("favour = ? and user_discussion_id = ?", true,userdiscussion.id).size
+   def self.getFavour(discussion_vote)
+    discussionvote=discussion_vote.compact
+    discussionvote.map{|v|v if v.favour.equal?true}.compact.size
   end
 
-  def self.getAgainst(userdiscussion)
-    where("against = ? and user_discussion_id = ?", true,userdiscussion.id).size
+  def self.getAgainst(discussion_vote)
+    discussionVote=discussion_vote.compact
+    discussionVote.map{|v|v if v.against.equal?true}.compact.size
   end 
 
   def check_vote(vot)
@@ -18,6 +20,6 @@ class Vote < ActiveRecord::Base
      else        
         update_attributes(:against => false ,:favour => true) 
      end
-  end  
+  end
  end
 

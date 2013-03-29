@@ -1,33 +1,33 @@
 <h1>Declarations for <%= @discussion.name%> - <%= @user_profile.try(:city)%></h1>
 <%= form_for @vote ,:url=>get_votes_discussion_votes_path(@discussion) do |f| %>
 <table border="1">
-	<tr>
-		 <th>No</th>
-		 <th>Declaration</th>
-		 <th>For</th>
-		 <th>Total</th>
-		 <th>Against</th>
-		 <th>Total</th>
-		 <th>Author</th>
-	</tr>
+        <tr>
+                 <th>No</th>
+                 <th>Declaration</th>
+                 <th>For</th>
+                 <th>Total</th>
+                 <th>Against</th>
+                 <th>Total</th>
+                 <th>Author</th>
+        </tr>
     <tr>
-    <td>1</td> 	
-	<td><%# = @discussion.determination %></td>
-	<%if @user_discussion.vote.present?
-		check1=@user_discussion.vote.favour
-		check2=@user_discussion.vote.against
-	  else
-	  	check1=true
+    <td>1</td>         
+        <td><%# = @discussion.determination %></td>
+        <%if @user_discussion.vote.present?
+                check1=@user_discussion.vote.favour
+                check2=@user_discussion.vote.against
+          else
+                  check1=true
         check2=false
-	%>
-	<%end%>
+        %>
+        <%end%>
     <td><%=radio_button_tag(:vote, "1", check1 , :class => "color_input") %></td>
-    <td><%=Vote.getFavour(@user_discussion)%></td>
+    <td><%=Vote.getFavour(@discussion_vote)%></td>
     <td><%= radio_button_tag(:vote, "0",check2 ,:class => "color_input") %></td>
-    <td><%=Vote.getAgainst(@user_discussion)%></td>
-    <td><%= f.submit "add"%></td>
+    <td><%=Vote.getAgainst(@discussion_vote)%></td>
+    <td><%= f.submit "vote"%></td>
     </tr>
-	</table>
+        </table>
 
 <%end%>
 <%= link_to "Back",comments_discussion_path(@user_discussion.discussion)%>

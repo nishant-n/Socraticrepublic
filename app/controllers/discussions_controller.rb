@@ -169,10 +169,12 @@ class DiscussionsController < ApplicationController
   end
 
    def votes
+    @vote=Vote.new
     @user_profile = current_user.user_profile
     @discussion = Discussion.find(params[:id])
-    @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:id],current_user.id) 
-    @vote=Vote.new
+    @discussion_user = UserDiscussion.where("discussion_id =?", @discussion)
+    @discussion_vote=@discussion_user.map{|du|du.vote}.compact
+    @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:id],current_user.id)
   end
 
 
