@@ -68,7 +68,7 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find(params[:id])
     respond_to do |format|
       if current_user.user_discussions.find_by_discussion_id(params[:id]).update_attributes(params[:user_discussion])
-        format.html { redirect_to discussions_path, notice: 'Discussion was successfully updated.' }
+        format.html { redirect_to discussions_path, notice: 'Thesis and Argument was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
