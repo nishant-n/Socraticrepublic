@@ -8,7 +8,7 @@
                  <th>Total</th>
                  <th>Against</th>
                  <th>Total</th>
-                 <th>Author</th>
+                 <th colspan='6'>Author</th>
         </tr>
     <tr>
     <td>1</td>         
@@ -26,6 +26,7 @@
     <td><%= radio_button_tag(:vote, "0",check2 ,:class => "color_input") %></td>
     <td><%=Vote.getAgainst(@discussion_vote)%></td>
     <td><%= f.submit "vote"%></td>
+    <td><%= link_to "Add"%></td>
     </tr>
         </table>
 
