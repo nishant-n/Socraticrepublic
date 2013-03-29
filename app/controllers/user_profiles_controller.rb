@@ -2,7 +2,7 @@ class UserProfilesController < ApplicationController
   # GET /user_profiles
   # GET /user_profiles.json
   before_filter :authenticate_user!
-  
+  load_and_authorize_resource :only => [:edit]
   def index
     @user_profile = UserProfile.all
 

@@ -24,6 +24,7 @@ class Ability
             cannot :destroy, Discussion,:user => {:id => user.id}
             #can :view_discussion, Discussion, :user => {:id => user.id}
             can :update, Comment, :user => {:id => user.id}
+            can :edit, UserProfile, :user => {:id => user.id}
             #can :comments, Discussion,:user => {:id => user.id}
         end
         
