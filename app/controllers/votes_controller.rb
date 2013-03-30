@@ -19,7 +19,7 @@ class VotesController < ApplicationController
           end
        else
      	  @vote.check_vote(params[:vote]) 
-     	  redirect_to votes_discussion_path(@userdiscussion.discussion), notice: 'Vote successfully updated .'
+     	  redirect_to new_discussion_vote_path(@userdiscussion.discussion), notice: 'Vote successfully updated .'
        end	
    end 
 
