@@ -16,4 +16,13 @@ class DeclarationsController < ApplicationController
     	 redirect_to :back, notice: 'Declaration  already created for this discussion.'
     end 
   end
+
+  def new
+    @declaration=Declaration.new
+    @discussion = Discussion.find(params[:discussion_id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.js
+    end 
+  end
 end

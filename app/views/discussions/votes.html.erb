@@ -32,6 +32,6 @@
 
 <%end%>
 
- <td><%= link_to "Add Declaration",add_declaration_discussion_path(@discussion),:remote => true%></td></br>
+ <td><%= link_to "Add Declaration",new_discussion_declaration_path(@discussion),:remote => true%></td></br>
 <%= link_to "Back",comments_discussion_path(@user_discussion.discussion)%>
 <div id="decla"></div>

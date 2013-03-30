@@ -178,15 +178,6 @@ class DiscussionsController < ApplicationController
     @discussion_vote=@discussion_user.map{|du|du.vote}.compact
     @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:id],current_user.id)
   end
-
-  def add_declaration
-    @declaration=Declaration.new
-    @discussion = Discussion.find(params[:id])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.js
-    end  
-  end
   
   def representive_list
 
