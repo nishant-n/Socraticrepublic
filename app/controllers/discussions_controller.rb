@@ -90,6 +90,8 @@ class DiscussionsController < ApplicationController
 
   def view_discussion
       @user_discussion = current_user.user_discussions.find_by_discussion_id(params[:id].to_i)
+      @user_comments = @user_discussion.comments
+      @comment = Comment.find_by_user_id_and_user_discussion_id(current_user.id,@user_discussion[:id])
       respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @discussion }
@@ -177,6 +179,27 @@ class DiscussionsController < ApplicationController
     @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:id],current_user.id)
   end
 
+  def add_declaration
+    @declaration=Declaration.new
+    @discussion = Discussion.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.js
+    end  
+  end
+  
+  def representive_list
 
+     @discussion = Discussion.find(params[:id])
+     @user_discussions = @discussion.joined_user
+  end   
+
+  def show_city
+    user=User.find_by_id(params[:user_id])
+    @city=user.user_profile.city
+    respond_to do|f|
+      f.js
+    end
+  end
 
 end

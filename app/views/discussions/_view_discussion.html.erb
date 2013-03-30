@@ -21,3 +21,31 @@
 </p>
 
 <% end %>
+<p> <%=link_to "View Members comments","javascript:void(0);",:id=>"view_click"%></p>
+<ul id="comments">
+
+    <% unless @user_comments.blank?%>
+
+       <%if !@user_comments.nil?%>
+            <% @user_comments.each do |user_comment|%>
+            
+              <li><%=user_comment.comments%>  :Commented by <b><%=user_comment.user.user_profile.try(:first_name) %></b>
+              
+              <div id="commentid_<%=user_comment.id%>" class="comment_cont"></div>
+            </li>
+            <%end%>
+       <%end%>
+       <%else%>
+       <h3>Not Found comment</h3>
+      <%end%>
+</ul>
+</fieldset>
+<script>
+	$(document).ready(function(){
+		$('#view_click').click(function(e){
+			 e.preventDefault()
+			 $('#comments').toggle('slow')
+		})
+	})
+</script>
+

@@ -12,15 +12,25 @@ Socraticrepublic::Application.routes.draw do
          get 'show_user_discussion'
          delete 'destroy_user_discussion'
          get 'votes'
+         get 'add_declaration'
+         get 'representive_list' 
+         get 'show_city'
     end
     collection do
-      get 'add_discussion'  
+      get 'add_discussion'
+        
     end 
     resources :votes do
       collection do
       post 'get_votes'
     end
   end
+
+  resources :declarations do
+      collection do
+      post 'create_declaration'
+    end
+  end    
 end  
 
 

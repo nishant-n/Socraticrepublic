@@ -1,0 +1,17 @@
+<h2>Repersentive Vote For <%=@discussion.try(:name)%> - <span id="city_name"></span> </h2>
+
+  <% @user_discussions.each do |user| %> 
+  <h3><%=user.user_profile.try(:first_name)%>
+   <%= radio_button_tag :first_name, user.id ,"",:class=>'fname'%> </h3>
+  <% end %>	
+
+<script>
+$(".fname").change(function(){
+	  $.ajax({
+			url: "<%= show_city_discussion_path(@discussion) %>",
+			data:{ user_id:$(this).val() }
+			
+	  })
+})
+</script>
+

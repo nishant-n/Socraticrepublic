@@ -8,11 +8,11 @@
                  <th>Total</th>
                  <th>Against</th>
                  <th>Total</th>
-                 <th colspan='6'>Author</th>
+                 <th>Author</th>
         </tr>
     <tr>
     <td>1</td>         
-        <td><%# = @discussion.determination %></td>
+        <td><%= @discussion.declaration.try(:name) %></td>
         <%if @user_discussion.vote.present?
                 check1=@user_discussion.vote.favour
                 check2=@user_discussion.vote.against
@@ -26,9 +26,12 @@
     <td><%= radio_button_tag(:vote, "0",check2 ,:class => "color_input") %></td>
     <td><%=Vote.getAgainst(@discussion_vote)%></td>
     <td><%= f.submit "vote"%></td>
-    <td><%= link_to "Add"%></td>
+   
     </tr>
         </table>
 
 <%end%>
+
+ <td><%= link_to "Add Declaration",add_declaration_discussion_path(@discussion),:remote => true%></td></br>
 <%= link_to "Back",comments_discussion_path(@user_discussion.discussion)%>
+<div id="decla"></div>

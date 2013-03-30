@@ -23,7 +23,16 @@
     			 <p><%= f.submit  "Save Changes"%></p>
     	    <% end %>
        <% end %>
-  <% end %>
+ <%else%>
+      <%= form_for (@comment)  do |f| %>
+        <p> Enter the Comment :<%=@comment.updated_at.strftime('%m/%d/%y')%>  </p>  
+        <%= f.fields_for :comments do |c| %>
+        <%#= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
+          <p><%= f.text_area :comments , :size => "35x4"%></p>
+          <p><%= f.submit  "Update comment"%></p>
+        <% end %>
+      <% end %>
+    <% end %>
 <br/>
 
 <p>Commets of member when user click <%=link_to "View","javascript:void(0);",:id=>"view_click"%></p>
@@ -32,9 +41,7 @@
        <%if !@user_comments.nil?%>
             <% @user_comments.each do |user_comment|%>
               <li><%=user_comment.comments%>:Commented by <%=user_comment.user.user_profile.try(:first_name) %>
-              <% if can? :update, user_comment %>
-                <%=link_to "Edit",edit_comment_path(user_comment),:class=>"edit_link" ,:id=>user_comment.id,:remote => true %>
-              <%end%>
+              
               <div id="commentid_<%=user_comment.id%>" class="comment_cont"></div>
             </li>
             <%end%>
