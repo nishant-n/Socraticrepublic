@@ -1,11 +1,11 @@
 <h2>Repersentive Vote For <%=@discussion.try(:name)%> - <span id="city_name"></span> </h2>
 
   <table>
-  <% @user_discussions.each do |user| %>
+    <% @user_discussions.each do |user| %>
   <tr> 
   	<td>
   <h3><%=user.user_profile.try(:first_name)%></td>
-   <td><%= radio_button_tag :first_name, user.id ,"",:class=>'fname'%> </h3></td>
+   <td><%= radio_button_tag :first_name, user.id ,false,:class=>'fname'%> </h3></td>
    </tr> 
   <% end %>	
  </table>
