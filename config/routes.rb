@@ -11,8 +11,6 @@ Socraticrepublic::Application.routes.draw do
          get 'view_user_comments'
          get 'show_user_discussion'
          delete 'destroy_user_discussion'
-         get 'votes'
-         get 'add_declaration'
          get 'representive_list' 
          get 'show_city'
     end
