@@ -23,7 +23,7 @@
 <% end %>
 </table>
 <%end%>
-    <%= link_to 'Make a Declarations and Vote',votes_discussion_path(@discussion)%></br>
+    <%= link_to 'Make a Declarations and Vote',new_discussion_vote_path(@discussion)%></br>
 	<%= link_to 'Representive Vote',representive_list_discussion_path(@discussion)%></br>
 	<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
 	<br><br/>

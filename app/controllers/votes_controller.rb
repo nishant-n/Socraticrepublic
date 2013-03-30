@@ -21,5 +21,15 @@ class VotesController < ApplicationController
      	  @vote.check_vote(params[:vote]) 
      	  redirect_to votes_discussion_path(@userdiscussion.discussion), notice: 'Vote successfully updated .'
        end	
-   end  
+   end 
+
+    def new
+      @vote=Vote.new
+      @user_profile = current_user.user_profile
+      @discussion = Discussion.find(params[:discussion_id])
+      @discussion_user = UserDiscussion.where("discussion_id =?", @discussion)
+      @discussion_vote=@discussion_user.map{|du|du.vote}.compact
+      @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:discussion_id],current_user.id)
+    	
+   end 
 end
