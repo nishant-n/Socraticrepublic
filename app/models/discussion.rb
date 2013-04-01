@@ -4,7 +4,7 @@ class Discussion < ActiveRecord::Base
   belongs_to :user
   has_many :joined_user,:through=>:user_discussions ,:source =>:user
   has_many :comments
-  has_one  :declaration
+  has_many  :declarations
   validates :name, :presence => true 
                     
 

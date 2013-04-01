@@ -1,7 +1,7 @@
 class Vote < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :favour, :against
-  validates_uniqueness_of :user_discussion_id
+  
   belongs_to :user_discussion
 
    def self.getFavour(discussion_vote)

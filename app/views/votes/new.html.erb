@@ -10,24 +10,19 @@
                  <th>Total</th>
                  <th>Author</th>
         </tr>
+        <% @discussion.declarations.each do|dec|%>
     <tr>
-    <td>1</td>         
-        <td><%= @discussion.declaration.try(:name) %></td>
-        <%if @user_discussion.vote.present?
-                check1=@user_discussion.vote.favour
-                check2=@user_discussion.vote.against
-          else
-                  check1=true
-        check2=false
-        %>
-        <%end%>
-    <td><%=radio_button_tag(:vote, "1", check1 , :class => "color_input") %></td>
-    <td><%=Vote.getFavour(@discussion_vote)%></td>
-    <td><%= radio_button_tag(:vote, "0",check2 ,:class => "color_input") %></td>
-    <td><%=Vote.getAgainst(@discussion_vote)%></td>
-    <td><%= f.submit "vote"%></td>
+    <td><%= dec.id%></td>         
+        <td><%= dec.try(:name) %></td>
+      
+    <td><%=radio_button_tag(:vote, "1", false , :class => "color_input") %></td>
+    <td><%#=Vote.getFavour(@discussion_vote)%></td>
+    <td><%= radio_button_tag(:vote, "0",false ,:class => "color_input") %></td>
+    <td><%#=Vote.getAgainst(@discussion_vote)%></td>
+    <td><%#= f.submit "vote"%></td>
    
     </tr>
+    <%end%>
         </table>
 
 <%end%>
