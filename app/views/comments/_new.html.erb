@@ -1,0 +1,8 @@
+<%= form_for @user_discussion ,:url=>comments_path ,:method=>:post ,:remote=>true do |f| %>
+    <p> Enter the Comment	</p>	
+    <%= f.fields_for :comments do |c| %>
+      <%= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
+      <p><%= c.text_area :comments , :size => "35x4"%></p>
+      <p><%= f.submit  "Save Changes"%></p>
+    <% end %>
+<% end %>

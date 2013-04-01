@@ -1,8 +1,10 @@
- <%= form_for (@comment)  do |f| %>
-		   <p> Enter the Comment	</p>	
-			<%= f.fields_for :comments do |c| %>
-			  <%#= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
-			 <p><%= f.text_area :comments , :size => "35x4"%></p>
-			 <p><%= f.submit  "Update comment"%></p>
-	    <% end %>
-  <% end %>
+ <%= form_for (@comment) ,:remote=>true do |f| %>
+    <p> Enter the Comment :<%=@comment.updated_at.strftime('%m/%d/%y')%></p>	
+	<%= f.fields_for :comments do |c| %>
+		  <%#= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
+		 <p><%= f.text_area :comments , :size => "35x4"%></p>
+		 <p><%= f.submit  "Update comment"%></p>
+    <% end %>
+<% end %>
+
+ 

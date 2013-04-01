@@ -12,54 +12,12 @@
 
    <p><%=text_area_tag @user_discussion.try(:argument),@user_discussion.try(:argument) ,:readonly => true%></p>
 
-
-
-   <% unless !@comment.blank? %>
-      <%= form_for @user_discussion ,:url=>comments_path ,:method=>:post do |f| %>
-    		   <p> Enter the Comment	</p>	
-    			<%= f.fields_for :comments do |c| %>
-    			  <%= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
-    			 <p><%= c.text_area :comments , :size => "35x4"%></p>
-    			 <p><%= f.submit  "Save Changes"%></p>
-    	    <% end %>
-       <% end %>
- <%else%>
-      <%= form_for (@comment)  do |f| %>
-        <p> Enter the Comment :<%=@comment.updated_at.strftime('%m/%d/%y')%>  </p>  
-        <%= f.fields_for :comments do |c| %>
-        <%#= c.hidden_field :user_discussion_id ,:value=>f.object.id %>
-          <p><%= f.text_area :comments , :size => "35x4"%></p>
-          <p><%= f.submit  "Update comment"%></p>
-        <% end %>
+   <div id="comments_partial">
+      <% unless !@comment.blank? %>
+         <%= render :partial => "comments/new" %>
+      <%else%>
+         <%= render :partial => "comments/edit" %>
       <% end %>
-    <% end %>
+   </div>
 <br/>
-
-<p>Commets of member when user click <%=link_to "View","javascript:void(0);",:id=>"view_click"%></p>
-<ul id="comments">
-    <% unless @user_comments.blank?%>
-       <%if !@user_comments.nil?%>
-            <% @user_comments.each do |user_comment|%>
-              <li><%=user_comment.comments%>:Commented by <%=user_comment.user.user_profile.try(:first_name) %>
-              
-              <div id="commentid_<%=user_comment.id%>" class="comment_cont"></div>
-            </li>
-            <%end%>
-       <%end%>
-       <%else%>
-       <h3>Not Found comment</h3>
-      <%end%>
-</ul>
-
-
- </fieldset>
-<script>
-	$(document).ready(function(){
-		$('#view_click').click(function(e){
-			 e.preventDefault()
-			 $('#comments').toggle('slow')
-		})
-	})
-</script>
-
 
