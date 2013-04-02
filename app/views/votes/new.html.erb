@@ -1,32 +1,63 @@
 <h1>Declarations for <%= @discussion.name%> - <%= @user_profile.try(:city)%></h1>
 <%= form_for @vote ,:url=>get_votes_discussion_votes_path(@discussion) do |f| %>
-<table border="1">
-        <tr>
-                 <th>No</th>
-                 <th>Declaration</th>
-                 <th>For</th>
-                 <th>Total</th>
-                 <th>Against</th>
-                 <th>Total</th>
-                 <th>Author</th>
-        </tr>
-        <% @discussion.declarations.each do|dec|%>
-    <tr>
-    <td><%= dec.id%></td>         
-        <td><%= dec.try(:name) %></td>
-      
-    <td><%=radio_button_tag(:vote, "1", false , :class => "color_input") %></td>
-    <td><%#=Vote.getFavour(@discussion_vote)%></td>
-    <td><%= radio_button_tag(:vote, "0",false ,:class => "color_input") %></td>
-    <td><%#=Vote.getAgainst(@discussion_vote)%></td>
-    <td><%#= f.submit "vote"%></td>
-   
-    </tr>
-    <%end%>
-        </table>
+  <table border="1">
+     <tr>
+        <th>No</th>
+        <th>Declaration</th>
+        <th>For</th>
+        <th>Total</th>
+        <th>Against</th>
+        <th>Total</th>
+        <th>Author</th>
+     </tr>
+ 
+    <% @user_declaration.each do|dec|%>
+     <tr>
+        <td><%= dec.id%></td>         
+       <td><%= dec.try(:name) %></td>
+       <% value = dec.votes.find_by_user_id_and_declaration_id(current_user,dec)
+        if  value.present?
+               check1=true
+               check2=false
 
+        else
+               check1= dec.votes.find_by_user_id_and_declaration_id(current_user,dec).try(:favour)
+               check2=dec.votes.find_by_user_id_and_declaration_id(current_user,dec).try(:against)
+         end 
+       %> 
+       <td>
+        <%=radio_button_tag("vote[#{dec.id}]", true , dec.votes.find_by_user_id_and_declaration_id(current_user,dec).try(:favour),:class=>"dec") %></td>
+        <td><%=Vote.getFavour(dec)%></td>
+       <td><%=radio_button_tag("vote[#{dec.id}]", false,dec.votes.find_by_user_id_and_declaration_id(current_user,dec).try(:against),:class=>"dec1") %></td>
+       <td><%=Vote.getAgainst(dec)%></td>
+       <td><%= dec.user_discussion.user.user_profile.first_name%></td>
+       </tr>
+     <%end%>
+   </table>
 <%end%>
-
+<td><%= link_to "Save vote", get_votes_discussion_votes_path(@discussion),:id=>"save_post"%></td></br>
  <td><%= link_to "Add Declaration",new_discussion_declaration_path(@discussion),:remote => true%></td></br>
 <%= link_to "Back",comments_discussion_path(@user_discussion.discussion)%>
 <div id="decla"></div>
+<script>
+
+  $("#save_post").click(function(e){
+      e.preventDefault();
+      $("#new_vote").submit();
+  })
+ $("#new_vote input[type='radio']").click(function(){
+  if (( $(this).attr('class')=="dec"))
+  {
+    var vote_fav = true
+    var vote_aga = false
+  }
+  else{
+    var vote_fav = false
+    var vote_aga = true
+  }
+ /* $.ajax({url: "<%= get_vote_record_discussion_votes_path(@discussion)%>" ,
+  data:{ declaration_id:$(this).val(),favour:vote_fav,against:vote_aga}
+     });*/
+   });
+
+</script>

@@ -2,11 +2,10 @@ class DeclarationsController < ApplicationController
 	
 
   def create_declaration
-  	 
-  
-	  @declaration=Declaration.new
+  	@declaration=Declaration.new
 	  @declaration.name = params[:declaration][:name]
-	  @declaration.discussion_id =params[:discussion_id]
+	  @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:discussion_id],current_user.id)
+    @declaration.user_discussion_id=@user_discussion.id
       respond_to do |format|
       if @declaration.save
           format.html { redirect_to :back, notice: 'Declaration  successfully created.' }

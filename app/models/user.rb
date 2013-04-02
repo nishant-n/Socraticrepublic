@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :discussions
   has_many :joined_discussions,:through=>:user_discussions,:source => :discussion
   has_many :comments
+  has_many :declarations
   def assign_default_role
     
     add_role(:user)

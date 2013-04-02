@@ -4,4 +4,6 @@ class UserDiscussion < ActiveRecord::Base
   belongs_to :user
   has_many :comments
   has_one :vote
+  has_many :comments
+  has_many  :declarations
 end
