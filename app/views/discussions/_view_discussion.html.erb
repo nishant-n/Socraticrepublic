@@ -1,15 +1,15 @@
-</br>
-<br/>
- <%= link_to "View Members for #{@user_discussion.discussion.name.capitalize}" , comments_discussion_path(@user_discussion.discussion) %></br></br> 
+
+
+ <%= link_to "View Members for #{@user_discussion.discussion.name.capitalize}" , comments_discussion_path(@user_discussion.discussion) %></br> 
 <%= form_for @user_discussion ,:url=>discussion_path(@user_discussion.discussion),:method=>:put do |f| %>
   
 <p>
-        Thesis Statment
+        Thesis Statement
 </p>
 
 <p> <%= f.text_area :thesis , :size => "35x4"%></p>
 <p>
-        Arguments
+        Affirmative Argument
 
 <p><%= f.text_area :argument , :size => "35x4"%></p>
 </p>
@@ -21,7 +21,7 @@
 </p>
 
 <% end %>
-<p> <%=link_to "View Members comments","javascript:void(0);",:id=>"view_click"%></p>
+<p> <%=link_to "Assenting Arguments","javascript:void(0);",:id=>"view_click"%></p>
 <ul id="comments">
 
     <% unless @user_comments.blank?%>
@@ -29,7 +29,7 @@
        <%if !@user_comments.nil?%>
             <% @user_comments.each do |user_comment|%>
             
-              <li><%=user_comment.comments%>  :Commented by <b><%=user_comment.user.user_profile.try(:first_name) %></b>
+              <li><%=user_comment.comments%>   : By <b><%=user_comment.user.user_profile.try(:first_name) %></b>
               
               <div id="commentid_<%=user_comment.id%>" class="comment_cont"></div>
             </li>

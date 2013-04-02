@@ -27,6 +27,9 @@
 
 <%end%>
 
+    <%= link_to "Save Vote"%></br>
  <td><%= link_to "Add Declaration",new_discussion_declaration_path(@discussion),:remote => true%></td></br>
-<%= link_to "Back",comments_discussion_path(@user_discussion.discussion)%>
-<div id="decla"></div>
+ <div id="decla"></div>
+<%= link_to "Back",comments_discussion_path(@user_discussion.discussion)%></br>
+<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
+
