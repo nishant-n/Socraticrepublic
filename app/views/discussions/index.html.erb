@@ -33,9 +33,7 @@
 
 
 <%= link_to 'Add Discussion', new_discussion_path %><br/>
-<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
-
-
+<%#= link_to "logout" , destroy_user_session_path ,:method => :delete %>
 <div id="cid"></div>
 
 <script>
@@ -52,3 +50,4 @@ $(document).ready(
 });
 
 </script>
+<%= link_to "logout" , destroy_user_session_path ,:method => :delete %>
