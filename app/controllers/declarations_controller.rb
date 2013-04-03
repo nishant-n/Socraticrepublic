@@ -31,7 +31,6 @@ class DeclarationsController < ApplicationController
   end
 
   def update
-    debugger
     @declaration=Declaration.find(params[:id])
     @declaration.user_discussion_id = @declaration.user_discussion.id
     @votes= @declaration.votes
