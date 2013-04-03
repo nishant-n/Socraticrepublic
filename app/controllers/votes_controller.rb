@@ -23,15 +23,28 @@ class VotesController < ApplicationController
       @vote=Vote.new
       @user_profile = current_user.user_profile
       @discussion = Discussion.find(params[:discussion_id])
-     # @discussion_user = UserDiscussion.where("discussion_id =?", @discussion)
+      #@discussion_user = UserDiscussion.where("discussion_id =?", @discussion)
       #@discussion_vote=@discussion_user.map{|du|du.vote}.compact
       @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:discussion_id],current_user.id)
       @user_declaration=Declaration.joins(:user_discussion).where("user_discussions.discussion_id=?",@discussion.id)
-    	
+    end
+
+
+   def post_user_vote
+   
+   @user_discussion_vote = UserDiscussionVote.find_by_voter_id_and_discussion_id(current_user.id,params[:discussion_id])
+   unless @user_discussion_vote 
+       @user_discussion_vote =UserDiscussionVote.new("user_discussion_id" => params[:user_discussion_id],"voter_id" => current_user.id,
+       "discussion_id"=>params[:discussion_id])
+       @user_discussion_vote.save
+     else
+       @user_discussion_vote.update_attributes(:user_discussion_id=>params[:user_discussion_id],"voter_id" => current_user.id,"discussion_id"=>params[:discussion_id])
    end 
 
-   def get_vote_record
-     puts "Hello"
-     
-   end
+     redirect_to :back, notice: 'Vote successfully created.'
+   end 
+
+   
+
+  
 end

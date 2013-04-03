@@ -171,10 +171,13 @@ class DiscussionsController < ApplicationController
   end
   
   def representive_list
-
+     @user_discussion_votes = UserDiscussionVote.new
      @discussion = Discussion.find(params[:id])
      @user_discussions = @discussion.joined_user
+     @user_discussion = UserDiscussion.find_by_discussion_id_and_user_id(params[:discussion_id],current_user.id)
   end   
+
+
 
   def show_city
     user=User.find_by_id(params[:user_id])

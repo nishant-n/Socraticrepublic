@@ -1,25 +1,50 @@
-<h2>Repersentative Vote For <%=@discussion.try(:name)%> - <span id="city_name"></span> </h2>
-
+<h2>Repersentative Vote For <%=@discussion.try(:name)%>- <%= @discussion.user.user_profile.try(:city)%> </h2>
+<%= form_for @user_discussion_votes,:method=>'post' ,:url=> post_user_vote_discussion_votes_path(@discussion) do |f| %>
   <table>
     <% @user_discussions.each do |user| %>
-  <tr> 
-  	<td>
-  <h3><%=user.user_profile.try(:first_name)%></td>
-   <td><%= radio_button_tag :first_name, user.id ,false,:class=>'fname'%> </h3></td>
+ <tr> 
+    <td>
+     
+     <h3><%=user.user_profile.try(:first_name)%></td>
+     <td><%=radio_button_tag :user_discussion_id, UserDiscussion.find_by_discussion_id_and_user_id(@discussion.id,user.id).id  ,false ,:class=>"dec" %></td>
+     <td></td>
+     <td>   <%= UserDiscussion.find_by_discussion_id_and_user_id(@discussion.id,user.id).user_discussion_votes.count %></td>
+      
+   
+ </tr> 
+  <% end %> 
+ 
 
-   </tr> 
-  <% end %>	
+<tr>
+ <td colspan='2'><h3>Total</h3></td>
+ <td> <%= @discussion.user_discussion_votes.count %></td>
+<td></td></tr>
+ <td><%= f.submit "save vote" %></td>
  </table>
+<%end %>
+
+<%= link_to "Back",comments_discussion_path%></br>
+
+
 <script>
 
-
 $(".fname").change(function(){
-	  $.ajax({
-			url: "<%= show_city_discussion_path(@discussion) %>",
-			data:{ user_id:$(this).val() }
-			
-	  })
+    $.ajax({
+      url: "<%= show_city_discussion_path(@discussion) %>",
+      data:{ user_id:$(this).val() }
+      
+    })
 })
+
+  $("#save_post").click(function(e){
+    alert(1);
+      e.preventDefault();
+      $(".edit_discussion").submit();
+  })
+ 
+
 </script>
-<td><td><%= button_tag "Save Vote"%></td> </h3></td></br>
-<%= link_to "Back",comments_discussion_path%></br>
+
+
+ 
+</script>

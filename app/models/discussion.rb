@@ -5,6 +5,7 @@ class Discussion < ActiveRecord::Base
   has_many :joined_user,:through=>:user_discussions ,:source =>:user
   has_many :comments
   has_many  :declarations
+  has_many :user_discussion_votes
   validates :name, :presence => true 
                     
 

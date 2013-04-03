@@ -6,4 +6,5 @@ class UserDiscussion < ActiveRecord::Base
   has_one :vote
   has_many :comments
   has_many  :declarations
+  has_many :user_discussion_votes
 end
