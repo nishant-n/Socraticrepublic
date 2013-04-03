@@ -1,0 +1,12 @@
+<h3>Edit Declaration</h3>
+<%= form_for @declaration,:method => :put,:url=>discussion_declaration_path(params[:discussion_id],params[:id]
+)  do |f| %>
+  
+  <div class="field">
+    <%= f.label :Declaration_Name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
