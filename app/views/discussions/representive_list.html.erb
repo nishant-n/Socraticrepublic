@@ -6,7 +6,7 @@
     <td>
      
      <h3><%=user.user_profile.try(:first_name)%></td>
-     <td><%=radio_button_tag :user_discussion_id, UserDiscussion.find_by_discussion_id_and_user_id(@discussion.id,user.id).id  ,UserDiscussionVote.find_by_voter_id_and_discussion_id(current_user.id,params[:id]).user_discussion.user.user_profile.first_name == user.user_profile.first_name  %></td>
+     <td><%=radio_button_tag :user_discussion_id, UserDiscussion.find_by_discussion_id_and_user_id(@discussion.id,user.id).id  ,false %></td>
      <td></td>
      <td>   <%= UserDiscussion.find_by_discussion_id_and_user_id(@discussion.id,user.id).user_discussion_votes.count %></td>
       
